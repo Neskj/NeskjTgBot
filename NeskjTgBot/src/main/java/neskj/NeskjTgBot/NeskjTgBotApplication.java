@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NeskjTgBotApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(NeskjTgBotApplication.class, args);
+		System.out.println("Hello from NeskjBot !!!");
 	}
 
 }
