@@ -16,16 +16,16 @@ public class MessageService implements MessageHandler {
             case "/start":
                 responser = new ResponseStart();
                 break;
-            case "/weatherApp":
+            case "/weather":
                 responser=new ResponseWeatherAppWhithApi(new ResponseWeatherApp());  //завернул в декоратор чтоб добавить feign client
                 break;
-            case "/dragerService":
+            case "/drager":
                 responser = new ResponseDragerService();
                 break;
-            case "/qrGenerator":
+            case "/generator":
                 responser = new ResponseQRgenerator();
                 break;
-            case "/neskjBot":
+            case "/bot":
                 responser = new ResponseNeskjBot();
                 break;
             default:
