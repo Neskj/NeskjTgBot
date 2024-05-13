@@ -1,6 +1,7 @@
 package neskj.NeskjTgBot.MessageHandler;
 
 import neskj.NeskjTgBot.MessageHandler.MessageResponser.*;
+import neskj.NeskjTgBot.MessageHandler.MessageResponser.ResponserDecorator.ResponseWeatherAppWhithApi;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,7 +17,7 @@ public class MessageService implements MessageHandler {
                 responser = new ResponseStart();
                 break;
             case "/weatherApp":
-                responser=new ResponseWeatherApp();
+                responser=new ResponseWeatherAppWhithApi(new ResponseWeatherApp());  //завернул в декоратор чтоб добавить feign client
                 break;
             case "/dragerService":
                 responser = new ResponseDragerService();
