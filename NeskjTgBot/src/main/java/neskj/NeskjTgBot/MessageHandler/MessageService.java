@@ -1,7 +1,6 @@
 package neskj.NeskjTgBot.MessageHandler;
 
 import neskj.NeskjTgBot.MessageHandler.MessageResponser.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,22 +14,23 @@ public class MessageService implements MessageHandler {
         switch (incomingMessage) {
             case "/start":
                 responser = new ResponseStart();
-                return responser.responseTheMessage();
+                break;
             case "/weatherApp":
                 responser=new ResponseWeatherApp();
-                return responser.responseTheMessage();
+                break;
             case "/dragerService":
-                responser=new ResponseDragerService();
-                return responser.responseTheMessage();
+                responser = new ResponseDragerService();
+                break;
             case "/qrGenerator":
-                responser=new ResponseQRgenerator();
-                return responser.responseTheMessage();
+                responser = new ResponseQRgenerator();
+                break;
             case "/neskjBot":
-                responser=new ResponseNeskjBot();
-                return responser.responseTheMessage();
+                responser = new ResponseNeskjBot();
+                break;
             default:
-                responser=new ResponseDefault();
-                return responser.responseTheMessage();
+                responser = new ResponseDefault();
+                break;
         }
+        return responser.responseTheMessage();
     }
 }
