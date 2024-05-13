@@ -1,5 +1,7 @@
 package neskj.NeskjTgBot.NeskjBot;
 
+import neskj.NeskjTgBot.MessageHandler.MessageHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -14,6 +16,13 @@ public class NeskjBot extends TelegramLongPollingBot {
     private String botName;
     @Value("${bot.token}")
     private String botToken;
+
+    private final MessageHandler messageHandler;
+
+    @Autowired
+    public NeskjBot(MessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
+    }
 
     @Override
     public String getBotUsername() {
@@ -32,11 +41,7 @@ public class NeskjBot extends TelegramLongPollingBot {
             String incomingMessage=update.getMessage().getText();
             long chatID=update.getMessage().getChatId();
 
-            if(incomingMessage.equals("/hello")){
-                sendMessage(chatID,"Hello world im a new Neskj's bot");
-            }else{
-                sendMessage(chatID,"Not understand you");
-            }
+            sendMessage(chatID, messageHandler.processTheMessage(incomingMessage));
         }
     }
 
@@ -53,6 +58,5 @@ public class NeskjBot extends TelegramLongPollingBot {
         }finally {
             System.out.println("-->> I send a new message: "+responseMessage+"<<--");
         }
-
     }
 }

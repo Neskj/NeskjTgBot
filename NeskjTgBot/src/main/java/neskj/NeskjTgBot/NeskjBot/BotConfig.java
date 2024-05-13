@@ -27,7 +27,5 @@ public class BotConfig {
         } catch (TelegramApiException e){
             System.out.println("-->> Exception while try to init bot <<--");
         }
-
-
     }
 }
