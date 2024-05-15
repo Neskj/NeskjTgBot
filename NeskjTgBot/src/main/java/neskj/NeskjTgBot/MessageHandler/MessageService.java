@@ -13,8 +13,8 @@ public class MessageService implements MessageHandler {
 
     private MessageResponser responser;
 
-    private Proxy proxy;
-
+    private Proxy proxy;  // Не корректно с точки зрения архитектуры потому что MessageService не нужен этот интерфейс
+                          // но при внедрении бина в ResponseWeatherAppWhithApi он null. Почему ?
     @Autowired
     public MessageService(Proxy proxy){
 
@@ -29,7 +29,7 @@ public class MessageService implements MessageHandler {
                 responser = new ResponseStart();
                 break;
             case "/weather":
-                responser=new ResponseWeatherAppWhithApi(new ResponseWeatherApp());  //завернул в декоратор чтоб добавить feign client
+                responser=new ResponseWeatherAppWhithApi(proxy,new ResponseWeatherApp());  //завернул в декоратор чтоб добавить feign client
                 break;
             case "/drager":
                 responser = new ResponseDragerService();
@@ -44,9 +44,6 @@ public class MessageService implements MessageHandler {
                 responser = new ResponseDefault();
                 break;
         }
-        City city=new City();
-        city.setCity("Москва");
-        ApiResponse api=proxy.getFromApi(city);
-        return responser.responseTheMessage()+" "+api.toString();
+        return responser.responseTheMessage();
     }
 }
