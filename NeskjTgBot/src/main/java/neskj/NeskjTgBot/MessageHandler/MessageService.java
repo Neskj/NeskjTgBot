@@ -2,12 +2,24 @@ package neskj.NeskjTgBot.MessageHandler;
 
 import neskj.NeskjTgBot.MessageHandler.MessageResponser.*;
 import neskj.NeskjTgBot.MessageHandler.MessageResponser.ResponserDecorator.ResponseWeatherAppWhithApi;
+import neskj.NeskjTgBot.Model.ApiResponse;
+import neskj.NeskjTgBot.Model.City;
+import neskj.NeskjTgBot.Proxy.Proxy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MessageService implements MessageHandler {
 
     private MessageResponser responser;
+
+    private Proxy proxy;
+
+    @Autowired
+    public MessageService(Proxy proxy){
+
+        this.proxy=proxy;
+    }
 
     @Override
     public String processTheMessage(String incomingMessage) {
@@ -32,6 +44,9 @@ public class MessageService implements MessageHandler {
                 responser = new ResponseDefault();
                 break;
         }
-        return responser.responseTheMessage();
+        City city=new City();
+        city.setCity("Москва");
+        ApiResponse api=proxy.getFromApi(city);
+        return responser.responseTheMessage()+" "+api.toString();
     }
 }
