@@ -13,7 +13,7 @@ public class MessageService implements MessageHandler {
 
     private MessageResponser responser;
 
-    private Proxy proxy;  // Не корректно с точки зрения архитектуры потому что MessageService не нужен этот интерфейс
+    private final Proxy proxy;  // Не корректно с точки зрения архитектуры потому что MessageService не нужен этот интерфейс
                           // но при внедрении бина в ResponseWeatherAppWhithApi он null. Почему ?
     @Autowired
     public MessageService(Proxy proxy){
