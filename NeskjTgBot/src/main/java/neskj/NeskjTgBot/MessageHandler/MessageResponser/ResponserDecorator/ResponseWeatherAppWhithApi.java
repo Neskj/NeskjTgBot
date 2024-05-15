@@ -15,8 +15,7 @@ public class ResponseWeatherAppWhithApi extends ResponserDecorator{
     }
 
     public String addApi(){
-        City city =new City();
-        city.setCity("Москва");
+        City city =new City("Москва");
         ApiResponse api=proxy.getFromApi(city);
         return api.toString();
     }
@@ -24,6 +23,6 @@ public class ResponseWeatherAppWhithApi extends ResponserDecorator{
     @Override
     public String responseTheMessage(){
 
-        return super.responseTheMessage()+"\n"+addApi();
+        return super.responseTheMessage()+"\nПо данным сервиса, актуальная погода в Москве : \n\n"+addApi();
     }
 }
