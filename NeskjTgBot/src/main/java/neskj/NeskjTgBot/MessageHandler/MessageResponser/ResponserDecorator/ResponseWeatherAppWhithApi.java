@@ -23,6 +23,6 @@ public class ResponseWeatherAppWhithApi extends ResponserDecorator{
     @Override
     public String responseTheMessage(){
 
-        return super.responseTheMessage()+"\nПо данным сервиса, актуальная погода в Москве : \n\n"+addApi();
+        return super.responseTheMessage()+"\n\nПо данным сервиса, актуальная погода в Москве : \n\n"+addApi();
     }
 }
