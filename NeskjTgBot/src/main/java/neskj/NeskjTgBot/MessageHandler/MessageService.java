@@ -1,9 +1,8 @@
 package neskj.NeskjTgBot.MessageHandler;
 
 import neskj.NeskjTgBot.MessageHandler.MessageResponser.*;
+import neskj.NeskjTgBot.MessageHandler.MessageResponser.ResponseJournal;
 import neskj.NeskjTgBot.MessageHandler.MessageResponser.ResponserDecorator.ResponseWeatherAppWhithApi;
-import neskj.NeskjTgBot.Model.ApiResponse;
-import neskj.NeskjTgBot.Model.City;
 import neskj.NeskjTgBot.Proxy.Proxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,6 +35,9 @@ public class MessageService implements MessageHandler {
                 break;
             case "/generator":
                 responser = new ResponseQRgenerator();
+                break;
+            case "/journal":
+                responser=new ResponseJournal();
                 break;
             case "/bot":
                 responser = new ResponseNeskjBot();
